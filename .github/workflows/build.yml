@@ -1,0 +1,30 @@
+name: Build Flet APK
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install flet pandas
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+      - name: Flet Build APK
+        run: flet build apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: typo-app-android
+          path: build/apk/*.apk
