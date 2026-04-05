@@ -33,8 +33,7 @@ jobs:
 
       - name: Flet Build APK
         run: |
-          # Usiamo direttamente il comando flet
-          flet build apk --icon icon.png --verbose
+          flet build apk --verbose
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
