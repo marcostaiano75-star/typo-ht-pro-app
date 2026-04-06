@@ -31,11 +31,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pandas
-          pip install -U flet  # <--- Forza l'installazione dell'ultima versione di Flet
+          pip install flet --upgrade --no-cache-dir  # <--- FORZA L'ULTIMA VERSIONE
 
       - name: Build APK
         run: |
-          python -m flet build apk --icon assets/icon.png
+          flet build apk --icon assets/icon.png
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
@@ -43,4 +43,3 @@ jobs:
           name: typo-ht-pro-android
           path: |
             dist/apk/*.apk
-            build/apk/*.apk
