@@ -30,14 +30,17 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas flet
+          pip install pandas
+          pip install -U flet  # <--- Forza l'installazione dell'ultima versione di Flet
 
       - name: Build APK
         run: |
-          flet build apk --icon assets/icon.png
+          python -m flet build apk --icon assets/icon.png
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: typo-ht-pro-android
-          path: dist/apk/*.apk
+          path: |
+            dist/apk/*.apk
+            build/apk/*.apk
