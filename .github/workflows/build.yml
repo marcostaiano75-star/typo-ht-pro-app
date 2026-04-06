@@ -30,8 +30,8 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas
-          pip install flet --upgrade --no-cache-dir  # <--- FORZA L'ULTIMA VERSIONE
+          pip uninstall flet flet-cli -y || true
+          pip install pandas flet==0.21.0  # Usiamo una versione specifica e stabile
 
       - name: Build APK
         run: |
@@ -41,5 +41,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: typo-ht-pro-android
-          path: |
-            dist/apk/*.apk
+          path: dist/apk/*.apk
