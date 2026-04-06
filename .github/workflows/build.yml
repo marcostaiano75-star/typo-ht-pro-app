@@ -16,10 +16,6 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Dependencies
-        run: |
-          pip install pandas flet
-
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -31,12 +27,17 @@ jobs:
         with:
           channel: 'stable'
 
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas flet
+
       - name: Build APK
         run: |
-          flet build apk --icon assets/icon.png --assets assets
+          flet build apk --icon assets/icon.png
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: typo-ht-pro-android
-          path: build/apk/*.apk
+          path: dist/apk/*.apk
